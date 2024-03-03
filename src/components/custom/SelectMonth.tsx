@@ -14,16 +14,22 @@ const SelectMonth = ({ month, setMonth }: propType) => {
     return month === 12 ? 1 : month + 1;
   };
   return (
-    <div className="flex justify-evenly items-center h-full">
-      <FaArrowLeft
-        className="text-3xl"
-        onClick={() => setMonth(minusMonth(month))}
-      />
-      <div className="text-3xl">{MonthEnum[month]}</div>
-      <FaArrowRight
-        className="text-3xl"
-        onClick={() => setMonth(addMonth(month))}
-      />
+    <div className="grid grid-cols-6 h-full">
+      <div className="col-start-1 col-span-1 flex justify-center items-center">
+        <FaArrowLeft
+          className="text-3xl"
+          onClick={() => setMonth(minusMonth(month))}
+        />
+      </div>
+      <div className="text-3xl col-start-2 col-span-4 flex justify-center items-center">
+        {MonthEnum[month]}
+      </div>
+      <div className="col-start-6 col-span-1 flex justify-center items-center">
+        <FaArrowRight
+          className="text-3xl"
+          onClick={() => setMonth(addMonth(month))}
+        />
+      </div>
     </div>
   );
 };
