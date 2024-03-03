@@ -73,6 +73,9 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
+    fontFamily: {
+      sans: ["Bakbak One", "sans"],
+    },
   },
   plugins: [require("tailwindcss-animate")],
 };

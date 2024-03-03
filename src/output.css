@@ -46,7 +46,7 @@ html,
   -o-tab-size: 4;
      tab-size: 4;
   /* 3 */
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: Bakbak One, sans;
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
@@ -612,6 +612,10 @@ body {
   height: 100%;
 }
 
+.h-\[100vh\] {
+  height: 100vh;
+}
+
 .h-\[100dvh\] {
   height: 100dvh;
 }
@@ -644,6 +648,10 @@ body {
   justify-content: center;
 }
 
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
 .gap-2 {
   gap: 0.5rem;
 }
@@ -658,6 +666,11 @@ body {
 
 .bg-muted {
   background-color: hsl(var(--muted));
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .outline {
