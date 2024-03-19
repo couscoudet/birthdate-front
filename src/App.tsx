@@ -10,6 +10,7 @@ import DisconnectButton from "./components/custom/DisonnectButton";
 import MyProfileButton from "./components/custom/MyProfileButton";
 import { BirthdayType } from "./type/globalTypes";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
+import CreateBirthModal from "./components/custom/CreateBirthModal";
 
 function App() {
   const date = new Date();
@@ -63,7 +64,9 @@ function App() {
           <DisconnectButton />
           <MyProfileButton />
         </div>
-        <AddButton />
+        <CreateBirthModal>
+          <AddButton />
+        </CreateBirthModal>
       </MyLayout.Footer>
     </MyLayout>
   );

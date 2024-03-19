@@ -10,23 +10,42 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import MyLayout from "@/layouts/MyLayout";
-import z from "zod";
+import { z, ZodType } from "zod";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
-const LoginPage = () => {
+const SignupPage = () => {
   const regexPassword =
     /^(?=.*[a-zàâäçéèêëîïôœùûü])(?=.*[A-ZÀÂÄÇÉÈÊËÎÏÔŒÙÛÜ])(?=.*\d)(?=.*[@$!%*?&çàâäéèêëîïôœùûü])([a-zA-ZÀÂÄÇÉÈÊËÎÏÔŒÙÛÜ\d@$!%*?&çàâäéèêëîïôœùûü]{8,})$/;
-  const formSchema = z.object({
-    email: z.string().email().min(4).max(200),
-    password: z.string().regex(regexPassword).max(30),
-  });
+
+  type FormData = {
+    email: string;
+    password: string;
+    passwordConfirm: string;
+  };
+
+  const formSchema: ZodType<FormData> = z
+    .object({
+      email: z.string().email().min(4).max(200),
+      password: z.string().regex(regexPassword).max(30),
+      passwordConfirm: z.string(),
+    })
+    .refine(
+      (data) => {
+        data.password === data.passwordConfirm;
+      },
+      {
+        path: ["confirmPassword"],
+        message: "Les passwords ne correspondent pas",
+      }
+    );
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
+      passwordConfirm: "",
     },
   });
 
@@ -40,7 +59,7 @@ const LoginPage = () => {
     <MyLayout>
       <MyLayout.Header>
         <div className="h-full flex justify-center items-center text-3xl">
-          Connexion
+          Inscription
         </div>
       </MyLayout.Header>
       <MyLayout.Body>
@@ -84,20 +103,37 @@ const LoginPage = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="passwordConfirm"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirmer mot de passe</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        className="text-black autofill:shadow-[inset_0_0_0px_1000px_rgb(240,240,240)]"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <div className="flex justify-center">
                 <Button
                   className="border-solid shadow-inner rounded-full shadow-fuchsia-200 py-2 px-8 mt-4"
                   type="submit"
                 >
-                  Valider
+                  S'insrire
                 </Button>
               </div>
             </form>
           </Form>
-          <Link to="/signup">Pas encore inscrit ?</Link>
-          <Link to="/forgot-password" className="mt-1">
-            Mot de passe oublié
-          </Link>
+          <div className="flex flex-col items-center">
+            <p className="text-xs">Déja inscrit ? </p>
+            <Link to="/login">Se connecter</Link>
+          </div>
         </div>
       </MyLayout.Body>
       <MyLayout.Footer>Footer</MyLayout.Footer>
@@ -105,4 +141,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignupPage;

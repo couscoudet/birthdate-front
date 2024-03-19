@@ -76,7 +76,12 @@ module.exports = {
     },
     fontFamily: {
       sans: ["Bakbak One", "sans"],
+      display: ["Poppins", "sans"],
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("autoprefixer"),
+    require("tailwindcss"),
+  ],
 };

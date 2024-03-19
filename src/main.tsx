@@ -4,6 +4,8 @@ import App from "./App.tsx";
 import "./output.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/LoginPage.tsx";
+import SignupPage from "./pages/SignUpPage.tsx";
+import ForgotPasswordPage from "./pages/ModifyPasswordPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -14,13 +16,17 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LoginPage />,
   },
+  {
+    path: "/signup",
+    element: <SignupPage />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPasswordPage />,
+  },
   // {
-  //   path: "/signup",
-  //   element: <SignupPage />,
-  // },
-  // {
-  //   path: "/forgot-password",
-  //   element: <ForgotPasswordPage />,
+  //   path: "/new-password",
+  //   element: <NewPasswordPage />,
   // },
   // {
   //   path: "/email-confirm",
