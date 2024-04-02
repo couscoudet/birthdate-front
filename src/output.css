@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.3 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -211,6 +211,8 @@ textarea {
   /* 1 */
   line-height: inherit;
   /* 1 */
+  letter-spacing: inherit;
+  /* 1 */
   color: inherit;
   /* 1 */
   margin: 0;
@@ -234,9 +236,9 @@ select {
 */
 
 button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
   -webkit-appearance: button;
   /* 1 */
   background-color: transparent;
@@ -524,6 +526,10 @@ body {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
 }
 
 ::backdrop {
@@ -574,6 +580,10 @@ body {
   --tw-backdrop-opacity:  ;
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
 }
 
 .sr-only {
@@ -670,6 +680,10 @@ body {
 
 .mt-4 {
   margin-top: 1rem !important;
+}
+
+.mt-5 {
+  margin-top: 1.25rem !important;
 }
 
 .flex {
@@ -770,6 +784,10 @@ body {
 
 .grid-cols-12 {
   grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 }
 
 .grid-cols-4 {
@@ -1014,6 +1032,10 @@ body {
   font-family: Poppins, sans !important;
 }
 
+.font-sans {
+  font-family: Bakbak One, sans !important;
+}
+
 .text-2xl {
   font-size: 1.5rem !important;
   line-height: 2rem !important;
@@ -1059,6 +1081,10 @@ body {
 
 .font-semibold {
   font-weight: 600 !important;
+}
+
+.font-thin {
+  font-weight: 100 !important;
 }
 
 .leading-none {
@@ -1145,6 +1171,12 @@ body {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow) !important;
 }
 
+.transition-all {
+  transition-property: all !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
+}
+
 .transition-colors {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke !important;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -1225,22 +1257,6 @@ body {
   --tw-shadow: var(--tw-shadow-colored) !important;
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(-25%);
-    animation-timing-function: cubic-bezier(0.8,0,1,1);
-  }
-
-  50% {
-    transform: none;
-    animation-timing-function: cubic-bezier(0,0,0.2,1);
-  }
-}
-
-.focus\:animate-bounce:focus {
-  animation: bounce 1s infinite !important;
-}
-
 .focus\:shadow-xl:focus {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color) !important;
@@ -1288,6 +1304,12 @@ body {
 
 .focus-visible\:ring-offset-2:focus-visible {
   --tw-ring-offset-width: 2px !important;
+}
+
+.active\:scale-90:active {
+  --tw-scale-x: .9 !important;
+  --tw-scale-y: .9 !important;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
 }
 
 .active\:shadow-xl:active {

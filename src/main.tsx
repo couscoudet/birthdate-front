@@ -6,11 +6,19 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/LoginPage.tsx";
 import SignupPage from "./pages/SignUpPage.tsx";
 import ForgotPasswordPage from "./pages/ModifyPasswordPage.tsx";
+import PrivateRoute from "./components/custom/PrivateRoute.tsx";
+import EmailConfirmPage from "./pages/EmailConfirmPage.tsx";
+import ErrorPage from "./pages/ErrorPage.tsx";
+import SignUpConfirmationPage from "./pages/SignUpConfirmationPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <PrivateRoute>
+        <App />
+      </PrivateRoute>
+    ),
   },
   {
     path: "/login",
@@ -28,10 +36,18 @@ const router = createBrowserRouter([
   //   path: "/new-password",
   //   element: <NewPasswordPage />,
   // },
-  // {
-  //   path: "/email-confirm",
-  //   element: <EmailConfirmPage />,
-  // },
+  {
+    path: "/email-confirm/:confirmationToken",
+    element: <EmailConfirmPage />,
+  },
+  {
+    path: "/error-page",
+    element: <ErrorPage />,
+  },
+  {
+    path: "/signup-confirmation",
+    element: <SignUpConfirmationPage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

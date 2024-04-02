@@ -12,9 +12,13 @@ import { Input } from "@/components/ui/input";
 import MyLayout from "@/layouts/MyLayout";
 import { z, ZodType } from "zod";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useApi } from "@/hooks/useApi";
+import { useState } from "react";
 
 const SignupPage = () => {
+  const api = useApi();
+
   const regexPassword =
     /^(?=.*[a-zàâäçéèêëîïôœùûü])(?=.*[A-ZÀÂÄÇÉÈÊËÎÏÔŒÙÛÜ])(?=.*\d)(?=.*[@$!%*?&çàâäéèêëîïôœùûü])([a-zA-ZÀÂÄÇÉÈÊËÎÏÔŒÙÛÜ\d@$!%*?&çàâäéèêëîïôœùûü]{8,})$/;
 
@@ -24,21 +28,20 @@ const SignupPage = () => {
     passwordConfirm: string;
   };
 
-  const formSchema: ZodType<FormData> = z
-    .object({
-      email: z.string().email().min(4).max(200),
-      password: z.string().regex(regexPassword).max(30),
-      passwordConfirm: z.string(),
-    })
-    .refine(
-      (data) => {
-        data.password === data.passwordConfirm;
-      },
-      {
-        path: ["confirmPassword"],
-        message: "Les passwords ne correspondent pas",
-      }
-    );
+  const formSchema: ZodType<FormData> = z.object({
+    email: z.string().email().min(4).max(200),
+    password: z.string().regex(regexPassword).max(30),
+    passwordConfirm: z.string(),
+  });
+  // .refine(
+  //   (data) => {
+  //     data.password === data.passwordConfirm;
+  //   },
+  //   {
+  //     path: ["confirmPassword"],
+  //     message: "Les passwords ne correspondent pas",
+  //   }
+  // );
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -50,13 +53,26 @@ const SignupPage = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    api
+      .post("/signup", { user: values })
+      .then((result) => {
+        if (result.request.status === 200) {
+          setSignUpConfirmed(1);
+        }
+      })
+      .catch(() => {
+        setSignUpConfirmed(2);
+      });
   }
+
+  const [signupConfirmed, setSignUpConfirmed] = useState(0);
 
   return (
     <MyLayout>
+      {signupConfirmed === 1 && (
+        <Navigate to="/signup-confirmation" replace={true} />
+      )}
+      {signupConfirmed === 2 && <Navigate to="/error-page" replace={true} />}
       <MyLayout.Header>
         <div className="h-full flex justify-center items-center text-3xl">
           Inscription
