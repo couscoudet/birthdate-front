@@ -12,9 +12,13 @@ import { Input } from "@/components/ui/input";
 import MyLayout from "@/layouts/MyLayout";
 import z from "zod";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useApi } from "@/hooks/useApi";
+import { useState } from "react";
 
 const LoginPage = () => {
+  const api = useApi();
+  const [isLoggedIn, setIsLoggedIn] = useState(0);
   const regexPassword =
     /^(?=.*[a-zàâäçéèêëîïôœùûü])(?=.*[A-ZÀÂÄÇÉÈÊËÎÏÔŒÙÛÜ])(?=.*\d)(?=.*[@$!%*?&çàâäéèêëîïôœùûü])([a-zA-ZÀÂÄÇÉÈÊËÎÏÔŒÙÛÜ\d@$!%*?&çàâäéèêëîïôœùûü]{8,})$/;
   const formSchema = z.object({
@@ -31,13 +35,26 @@ const LoginPage = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    api.post("/login", { user: values }).then((result) => {
+      if (result.request.status === 200 && result.data.user) {
+        localStorage.setItem("user", result.data.user);
+        localStorage.setItem("token", result.data.token);
+        localStorage.setItem("refreshToken", result.data.refreshToken);
+        setIsLoggedIn(1);
+        return;
+      } else {
+        setIsLoggedIn(2);
+        return <Navigate to="/error-page" replace={true} />;
+      }
+    });
   }
 
   return (
     <MyLayout>
+      {(localStorage.getItem("user") || isLoggedIn === 1) && (
+        <Navigate to="/" replace={true} />
+      )}
+      ;{isLoggedIn === 2 && <Navigate to="/error-page" replace={true} />};
       <MyLayout.Header>
         <div className="h-full flex justify-center items-center text-3xl">
           Connexion
