@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaPlugCircleXmark } from "react-icons/fa6";
+import { FaDoorOpen } from "react-icons/fa6";
 import { Navigate } from "react-router-dom";
 
 const DisconnectButton = () => {
@@ -18,7 +18,7 @@ const DisconnectButton = () => {
         onClick={() => disconnectUser()}
       >
         <div className="shadow-xl">
-          <FaPlugCircleXmark />
+          <FaDoorOpen />
         </div>
       </button>
     </>

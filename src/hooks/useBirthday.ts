@@ -45,7 +45,16 @@ const useBirthday = () => {
     }
   };
 
-  return { birthdays, loadBirthdaysForMonth, addBirthday };
+  const deleteBirthday = async (id: number) => {
+    try {
+      await api.delete(`/api/birthday/${id}`);
+      setBirthdays(birthdays.filter((birthday) => birthday.id !== id));
+    } catch (e) {
+      alert("erreur lors de la suppression : " + e);
+    }
+  };
+
+  return { birthdays, loadBirthdaysForMonth, addBirthday, deleteBirthday };
 };
 
 export default useBirthday;

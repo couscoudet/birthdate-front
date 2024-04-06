@@ -54,7 +54,7 @@ const LoginPage = () => {
       {(localStorage.getItem("user") || isLoggedIn === 1) && (
         <Navigate to="/" replace={true} />
       )}
-      ;{isLoggedIn === 2 && <Navigate to="/error-page" replace={true} />};
+      {isLoggedIn === 2 && <Navigate to="/error-page" replace={true} />}
       <MyLayout.Header>
         <div className="h-full flex justify-center items-center text-3xl">
           Connexion
