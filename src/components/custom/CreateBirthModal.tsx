@@ -27,7 +27,12 @@ type propType = {
 };
 
 const CreateBirthModal = ({ children, addBirthday }: propType) => {
-  const [birthday, setBirthday] = useState({ day: 0, month: 0, name: "" });
+  const [birthday, setBirthday] = useState({
+    id: 0,
+    day: 0,
+    month: 0,
+    name: "",
+  });
   const [step, setStep] = useState(1);
 
   const nextStep = () => {
@@ -72,7 +77,7 @@ const CreateBirthModal = ({ children, addBirthday }: propType) => {
 
   const reset = () => {
     setStep(1);
-    setBirthday({ day: 0, month: 0, name: "" });
+    setBirthday({ id: 0, day: 0, month: 0, name: "" });
   };
 
   return (
