@@ -20,6 +20,7 @@ FROM nginx:alpine AS server
 WORKDIR /usr/local/bin
 
 COPY --from=prod /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
 
