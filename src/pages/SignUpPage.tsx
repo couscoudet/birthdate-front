@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Link, Navigate } from "react-router-dom";
 import { useApi } from "@/hooks/useApi";
 import { useState } from "react";
+import axios from "axios";
 
 const SignupPage = () => {
   const api = useApi();
