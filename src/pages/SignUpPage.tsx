@@ -53,8 +53,8 @@ const SignupPage = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    api
-      .post("/signup", { user: values })
+    axios
+      .post(`${import.meta.env.VITE_ENV_BASE_URL}/signup`, { user: values })
       .then((result) => {
         if (result.request.status === 200) {
           setSignUpConfirmed(1);
