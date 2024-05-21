@@ -11,6 +11,8 @@ COPY . /app
 
 WORKDIR /app
 
+ENV VITE_ENV_BASE_URL=$VITE_ENV_BASE_URL
+
 RUN npm install --silent
 
 RUN npm run build
