@@ -13,12 +13,10 @@ import MyLayout from "@/layouts/MyLayout";
 import { z, ZodType } from "zod";
 import { Button } from "@/components/ui/button";
 import { Link, Navigate } from "react-router-dom";
-import { useApi } from "@/hooks/useApi";
 import { useState } from "react";
 import axios from "axios";
 
 const SignupPage = () => {
-  const api = useApi();
 
   const regexPassword =
     /^(?=.*[a-zàâäçéèêëîïôœùûü])(?=.*[A-ZÀÂÄÇÉÈÊËÎÏÔŒÙÛÜ])(?=.*\d)(?=.*[@$!%*?&çàâäéèêëîïôœùûü])([a-zA-ZÀÂÄÇÉÈÊËÎÏÔŒÙÛÜ\d@$!%*?&çàâäéèêëîïôœùûü]{8,})$/;
